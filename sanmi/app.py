@@ -1,4 +1,4 @@
-from sanmi import user
+from sanmi import user, contract
 from sanmi.user.models import User
 from flask import Flask
 from sanmi.extensions import db, migrate, bcrypt, jwtManager, cors
@@ -33,4 +33,5 @@ def register_extensions(app):
 
 def register_blueprints(app):
     app.register_blueprint(user.router.blueprint)
+    app.register_blueprint(contract.router.blueprint)
     return None
