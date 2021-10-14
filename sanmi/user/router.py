@@ -108,7 +108,6 @@ def login():
     user = User.query.filter_by(name=name).first()
     # 防止攻击，不要提示过多信息
     msg = "用户名或密码错误"
-    print(user.delete_at)
     if user is None:
         return jsonify(msg=msg)
     elif user.delete_at is not None:
