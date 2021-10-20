@@ -18,6 +18,17 @@ def all_contract():
         "data": Contract.query.all()
     })
 
+@blueprint.route("/<int:contract_id>")
+@jwt_required()
+@auth_role(['admin'])
+def get_contract_info_by_id(contract_id):
+    contract = Contract.query.filter_by(id=contract_id).first()
+    if contract is None:
+        return jsonify({"msg": "该合约不存在"})
+    return jsonify({
+        "data": contract
+    })
+
 
 @blueprint.route("/", methods=["POST"])
 @jwt_required()
