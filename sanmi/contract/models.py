@@ -2,6 +2,7 @@ from decimal import Decimal
 from dataclasses import dataclass
 from datetime import datetime
 from sanmi.database import db
+from sanmi.curtain.models import Curtain
 from sanmi.extensions import bcrypt
 
 
@@ -41,6 +42,7 @@ class Contract(db.Model):
     create_at: datetime
     update_at: datetime
     delete_at: datetime
+    curtain: Curtain
 
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.String(80), unique=True, nullable=False)
@@ -64,4 +66,4 @@ class Contract(db.Model):
     create_at = db.Column(db.DateTime, default=datetime.now)
     update_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
     delete_at = db.Column(db.DateTime, default=None)
-    # users = db.relationship('User', backref='rol', lazy=True)
+    curtain = db.relationship('Curtain', backref='rol', lazy=True)
