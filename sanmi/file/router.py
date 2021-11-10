@@ -4,6 +4,7 @@ import time
 from flask import Blueprint, jsonify, request, current_app, url_for
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from ..decorats import auth_role
+from sanmi.config import config
 
 blueprint = Blueprint("file", __name__, url_prefix="/file")
 
@@ -19,7 +20,7 @@ def upload_file():
     
     return jsonify({
         "data": {
-            "baseUrl": request.host_url,
+            "baseUrl": config.get("server", 'host_name') or request.host_url,
             "filePath": url_for('static', filename=filename),
             "filename": file.filename,
         }
