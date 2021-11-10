@@ -5,7 +5,6 @@ from sanmi.database import db
 from datetime import datetime
 
 from .models import Curtain
-from sanmi.contract.models import Contract
 from ..decorats import auth_role
 
 blueprint = Blueprint("curtain", __name__, url_prefix="/curtain")
@@ -24,6 +23,7 @@ def all_curtain():
 @jwt_required()
 @auth_role(['admin'])
 def add_curtain():
+    from sanmi.contract.models import Contract
     room_name = request.json.get('room_name', None)
     material = request.json.get('material', None)
     dangling = request.json.get('dangling', None)
